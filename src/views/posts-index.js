@@ -4,12 +4,30 @@ var ListItem = Backbone.View.extend({
   tagName: 'li',
 
   initialize() {
-    // Wire up events
+    // Wire up model events
+  },
+
+  events: {
+    'click .delete-item': 'delete',
+  },
+
+  delete() {
+    if (confirm(`Are you sure you want to delete this?`)) {
+      // Delete the record on the server
+      this.model.destroy();
+
+      // Remove this view from the list
+      this.remove();
+    }
   },
 
   render() {
     // Sets up the DOM
-    this.$el.html(`${this.model.get('title')} - ${this.model.get('body')}`);
+    this.$el.html(`
+      ${this.model.get('title')} - ${this.model.get('body')}
+
+      <a class="delete-item" href="#">Delete</a>
+    `);
 
     return this.$el;
   },
