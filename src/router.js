@@ -17,11 +17,8 @@ var Router = Backbone.Router.extend({
     var postIndex = new PostIndexView({collection: posts});
     postIndex.$el.appendTo(`#outlet`);
 
-
     // Get all posts from server
     posts.fetch();
-
-    // Show the Posts to the user
   },
 });
 

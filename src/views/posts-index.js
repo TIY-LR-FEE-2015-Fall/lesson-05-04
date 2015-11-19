@@ -1,3 +1,20 @@
+var ListItem = Backbone.View.extend({
+  model: null,
+
+  tagName: 'li',
+
+  initialize() {
+    // Wire up events
+  },
+
+  render() {
+    // Sets up the DOM
+    this.$el.html(`${this.model.get('title')} - ${this.model.get('body')}`);
+
+    return this.$el;
+  },
+});
+
 export default Backbone.View.extend({
   collection: null,
 
@@ -15,9 +32,9 @@ export default Backbone.View.extend({
 
     // For each item in collection make a new `li`
     this.collection.forEach((post) => {
-      $('<li></li>')
-        .html(`${post.get('title')} - ${post.get('body')}`)
-        .appendTo(this.$el);
+      var listItem = new ListItem({model: post});
+
+      this.$el.append(listItem.render());
     });
   },
 });
