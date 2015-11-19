@@ -25,7 +25,9 @@ export default Backbone.View.extend({
   },
 
   events: {
-    input() {
+    submit(ev) {
+      ev.preventDefault();
+
       // Get the title
       var title = this.$el.find('.post-title').val();
 
@@ -33,6 +35,8 @@ export default Backbone.View.extend({
       var body = this.$el.find('.post-body').val();
 
       this.model.set({title, body});
+
+      this.model.save();
     },
   },
 });
