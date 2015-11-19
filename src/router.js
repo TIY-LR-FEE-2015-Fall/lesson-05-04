@@ -16,7 +16,7 @@ var Router = Backbone.Router.extend({
 
     // Create an instance of PostIndexView
     var postIndex = new PostIndexView({collection: posts});
-    postIndex.$el.appendTo(`#outlet`);
+    $('#outlet').html(postIndex.$el);
 
     // Get all posts from server
     posts.fetch();
@@ -25,7 +25,7 @@ var Router = Backbone.Router.extend({
   newPost() {
     var postForm = new PostFormView({});
 
-    postForm.$el.appendTo('#outlet');
+    $('#outlet').html(postForm.$el);
   },
 });
 
