@@ -3,6 +3,8 @@ import BlogPost from '../models/blog-post';
 export default Backbone.View.extend({
   model: null,
 
+  tagName: 'form',
+
   initialize() {
     this.resetForm();
   },
@@ -11,17 +13,18 @@ export default Backbone.View.extend({
     this.model = new BlogPost();
 
     this.listenTo(this.model, 'change', this.render);
+    this.render();
   },
 
   render() {
-    var title = this.model.get('title');
-    var body = this.model.get('body');
+    this.$el.html(`
+      <h2>New Post</h2>
 
-    // Update the h2
-    this.$el.find('h2').text(title);
+      <input type="text" class="post-title" value="${this.model.get('title')}">
+      <textarea class="post-body">${this.model.get('body')}</textarea>
 
-    // Update the h3
-    this.$el.find('h3').text(body);
+      <button>Submit</button>
+    `);
   },
 
   events: {

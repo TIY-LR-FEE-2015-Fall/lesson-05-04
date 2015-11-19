@@ -1,5 +1,6 @@
 import PostListCollection from './collections/post-list';
 import PostIndexView from './views/posts-index';
+import PostFormView from './views/post-form';
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -19,6 +20,12 @@ var Router = Backbone.Router.extend({
 
     // Get all posts from server
     posts.fetch();
+  },
+
+  newPost() {
+    var postForm = new PostFormView({});
+
+    postForm.$el.appendTo('#outlet');
   },
 });
 
