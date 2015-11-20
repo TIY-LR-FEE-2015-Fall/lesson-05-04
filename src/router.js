@@ -1,5 +1,6 @@
 import PostListCollection from './collections/post-list';
 import PostIndexView from './views/posts-index';
+import PostSidebarView from './views/posts-sidebar';
 import PostFormView from './views/post-form';
 
 var Router = Backbone.Router.extend({
@@ -10,16 +11,23 @@ var Router = Backbone.Router.extend({
     ':id/edit': 'editPost',
   },
 
+  posts: null,
+
+  initialize() {
+    this.posts = new PostListCollection();
+    this.posts.fetch();
+
+    // Making the sidebar
+    this.sidebar = new PostSidebarView({collection: this.posts});
+
+    $('#side-bar').html(this.sidebar.$el);
+  },
+
   listAllPosts() {
-    // Need a Backbone Collection
-    var posts = new PostListCollection();
-
     // Create an instance of PostIndexView
-    var postIndex = new PostIndexView({collection: posts});
-    $('#outlet').html(postIndex.$el);
+    var postIndex = new PostIndexView({collection: this.posts});
 
-    // Get all posts from server
-    posts.fetch();
+    $('#outlet').html(postIndex.$el);
   },
 
   newPost() {
