@@ -42,6 +42,7 @@ export default Backbone.View.extend({
     // Setup events
     this.listenTo(this.collection, 'change reset add remove', this.render);
 
+    // Make sure that if no new items are fetch we still see something on screen
     this.render();
   },
 

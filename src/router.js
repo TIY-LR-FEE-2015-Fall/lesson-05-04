@@ -31,7 +31,9 @@ var Router = Backbone.Router.extend({
   },
 
   newPost() {
-    var postForm = new PostFormView({});
+    var postForm = new PostFormView({
+      collection: this.posts,
+    });
 
     $('#outlet').html(postForm.$el);
   },

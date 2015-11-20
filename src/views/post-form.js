@@ -2,6 +2,7 @@ import BlogPost from '../models/blog-post';
 
 export default Backbone.View.extend({
   model: null,
+  collection: null,
 
   tagName: 'form',
 
@@ -40,6 +41,10 @@ export default Backbone.View.extend({
       this.model.set({title, body});
 
       this.model.save();
+
+      this.collection.add(this.model);
+
+      Backbone.history.navigate('', {trigger: true});
     },
   },
 });
